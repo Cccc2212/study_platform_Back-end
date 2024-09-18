@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.chris.usercenter.mapper.NavMapper">
+
+    <resultMap id="BaseResultMap" type="com.chris.usercenter.model.domain.Nav">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="label" column="label" jdbcType="VARCHAR"/>
+            <result property="navKey" column="navKey" jdbcType="VARCHAR"/>
+            <result property="url" column="url" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,label,navKey,
+        url
+    </sql>
+</mapper>

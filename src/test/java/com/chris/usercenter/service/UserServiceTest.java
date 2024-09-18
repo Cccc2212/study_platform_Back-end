@@ -34,37 +34,39 @@ class UserServiceTest {
 
     @Test
     void userRegister() {
+        String username = "abcljx";
         String userAccount = "chris";
         String userPassword = "";
         String checkPassword = "123456";
-        long result = userService.userRegister(userAccount, userPassword, checkPassword);
+        String platformCode = "1";
+        long result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "ljx";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "chris";
         userPassword = "123456";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "chri s";
         userPassword = "12345678";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
         checkPassword = "123456789";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "123";
         checkPassword = "12345678";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
         userAccount = "chris";
-        result = userService.userRegister(userAccount, userPassword, checkPassword);
+        result = userService.userRegister(username,userAccount, userPassword, checkPassword, platformCode);
         Assertions.assertEquals(-1, result);
 
 
