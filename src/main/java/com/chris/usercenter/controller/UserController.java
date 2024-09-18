@@ -165,7 +165,12 @@ public class UserController {
         return ResultUtils.success(result);
     }
 
-
+    /**
+     * 防止重要数据泄露
+     *
+     * @param request
+     * @return
+     */
     @GetMapping("/current")
     public BaseResponse<User> getCurrentUser(HttpServletRequest request) {
         Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
