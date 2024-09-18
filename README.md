@@ -1,4 +1,4 @@
-# 在线学习平台（待完善，欢迎大佬指导学习）
+# 在线学习平台---后端（待完善，欢迎大佬指导学习）
 
 ## 项目概述
 
@@ -40,9 +40,122 @@
 
 ## 安装步骤
 
+### 前端
+
+1. **克隆仓库**
+
+   ```bash
+   git clone https://github.com/Cccc2212/study_platform_Front-end.git
+   cd study_platform_Front-end
+   ```
+
+2. **安装依赖**
+
+   ```bash
+   npm install
+   ```
+
+   或
+
+   ```bash
+   yarn
+   ```
+
+3. **启动项目**
+
+   ```bash
+   npm start
+   ```
+
+4. **构建项目**
+
+   ```bash
+   npm run build
+   ```
+
+5. **检查代码风格**
+
+   ```bash
+   npm run lint
+   ```
+
+   自动修复一些 lint 错误：
+
+   ```bash
+   npm run lint:fix
+   ```
+
+6. **测试代码**
+
+   ```bash
+   npm test
+   ```
+
+7. **更多信息**
+
+   你可以查看完整的文档在 [Ant Design Pro 官方网站](https://pro.ant.design)。欢迎在 [GitHub](https://github.com/ant-design/ant-design-pro) 提供反馈。
+
 ### 后端
 
 1. **克隆仓库**
+
    ```bash
    git clone https://github.com/Cccc2212/study_platform_Back-end.git
    cd study_platform_Back-end
+   ```
+
+2. **配置环境**
+
+   在项目根目录下创建一个 `.env` 文件，并添加以下内容来配置数据库连接和其他环境变量：
+
+   ```
+   SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/study_platform
+   SPRING_DATASOURCE_USERNAME=root
+   SPRING_DATASOURCE_PASSWORD=your_password
+   ```
+
+   请确保将 `your_password` 替换为您的 MySQL 数据库密码。
+
+3. **构建项目**
+
+   使用 Maven 进行项目构建和依赖管理：
+
+   ```bash
+   mvn clean install
+   ```
+
+4. **启动项目**
+
+   使用 Maven 启动 Spring Boot 应用程序：
+
+   ```bash
+   mvn spring-boot:run
+   ```
+
+   或者在 IDE 中直接运行 `com.example.StudyPlatformApplication` 类的 `main` 方法。
+
+5. **数据库初始化**
+
+   项目启动时会自动创建数据库表。如果需要手动初始化数据库，可以在 `src/main/resources` 目录下找到 SQL 脚本文件并执行。
+
+6. **运行单元测试**
+
+   确保项目正常构建后，运行单元测试以验证代码功能：
+
+   ```bash
+   mvn test
+   ```
+
+## 配置说明
+
+- **数据库连接**: 配置文件中的 `SPRING_DATASOURCE_URL`、`SPRING_DATASOURCE_USERNAME` 和 `SPRING_DATASOURCE_PASSWORD` 应与实际的数据库设置一致。
+- **日志配置**: 可以在 `src/main/resources/application.properties` 文件中配置日志级别和日志输出位置。
+
+## 更多信息
+
+有关更多详细信息和文档，请访问 [Spring Boot 官方文档](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/) 以及 [MyBatis 官方文档](https://mybatis.org/mybatis-3/).
+
+如有任何问题或反馈，请通过 [GitHub Issues](https://github.com/Cccc2212/study_platform_Back-end/issues) 联系我们。
+```
+
+你可以将这段 Markdown 内容复制到你的 README 文件中。如果有任何进一步的修改需求，随时告诉我！
