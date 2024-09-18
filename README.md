@@ -157,5 +157,3 @@
 
 如有任何问题或反馈，请通过 [GitHub Issues](https://github.com/Cccc2212/study_platform_Back-end/issues) 联系我们。
 ```
-
-你可以将这段 Markdown 内容复制到你的 README 文件中。如果有任何进一步的修改需求，随时告诉我！
