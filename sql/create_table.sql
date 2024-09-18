@@ -19,3 +19,15 @@ create table user
 )
     comment '用户表';
 
+-- auto-generated definition
+create table nav
+(
+    id     bigint auto_increment
+        primary key,
+    label  varchar(255) not null comment '标签名',
+    navKey varchar(100) not null comment 'key值',
+    url    varchar(255) null comment '网址'
+)
+    comment '导航表';
+
+
