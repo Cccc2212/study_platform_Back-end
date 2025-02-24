@@ -26,7 +26,7 @@ public class Nav implements Serializable {
     /**
      * key值
      */
-    private String navKey;
+    private String navKey   ;
 
     /**
      * 网址
