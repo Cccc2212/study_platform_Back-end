@@ -2,9 +2,12 @@ package com.chris.usercenter.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.chris.usercenter.commom.ErrorCode;
+import com.chris.usercenter.exception.BusinessException;
 import com.chris.usercenter.mapper.SudokupuzzlesMapper;
 import com.chris.usercenter.model.domain.Sudokupuzzles;
 import com.chris.usercenter.service.SudokupuzzlesService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,6 +19,7 @@ import java.util.Random;
 * @createDate 2025-02-18 14:29:09
 */
 @Service
+@Slf4j
 public class SudokupuzzlesServiceImpl extends ServiceImpl<SudokupuzzlesMapper, Sudokupuzzles>
     implements SudokupuzzlesService {
     /**
@@ -50,6 +54,23 @@ public class SudokupuzzlesServiceImpl extends ServiceImpl<SudokupuzzlesMapper, S
         Random rand = new Random();
         int randomIndex = rand.nextInt(puzzles.size());
         return puzzles.get(randomIndex);
+    }
+    /**
+     * 保存一个数独题目到数据库
+     *
+     * @return
+     */
+    @Override
+    public Integer savePuzzle(String initial_board,String solution,Integer difficulty){
+        Sudokupuzzles sudokupuzzles = new Sudokupuzzles();
+        sudokupuzzles.setDifficulty(difficulty);
+        sudokupuzzles.setSolution(solution);
+        sudokupuzzles.setInitial_board(initial_board);
+        boolean saveResult = this.save(sudokupuzzles);
+        if (!saveResult) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "保存数据异常:(");
+        }
+        return sudokupuzzles.getId();
     }
 }
 

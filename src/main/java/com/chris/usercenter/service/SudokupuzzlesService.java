@@ -24,5 +24,12 @@ public interface SudokupuzzlesService extends IService<Sudokupuzzles> {
      * @return
      */
     Sudokupuzzles getRandomPuzzleByDifficulty(Integer difficulty);
+    /**
+     * 保存一个数独题目到数据库
+     *
+     *
+     * @return
+     */
+    Integer savePuzzle(String initial_board,String solution,Integer difficulty);
 }
 
