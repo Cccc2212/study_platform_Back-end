@@ -1,17 +1,21 @@
 package com.chris.usercenter.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.chris.usercenter.commom.BaseResponse;
 import com.chris.usercenter.commom.ErrorCode;
 import com.chris.usercenter.commom.ResultUtils;
 import com.chris.usercenter.exception.BusinessException;
 import com.chris.usercenter.model.domain.Sudokupuzzles;
 import com.chris.usercenter.model.domain.User;
+import com.chris.usercenter.model.domain.request.PuzzleDeleteRequest;
 import com.chris.usercenter.model.domain.request.PuzzleGenerateRequest;
 import com.chris.usercenter.service.SudokupuzzlesService;
 import jakarta.annotation.Resource;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.chris.usercenter.constant.UserConstant.ADMIN_ROLE;
 import static com.chris.usercenter.constant.UserConstant.USER_LOGIN_STATE;
@@ -55,6 +59,19 @@ public class SudokuController {
         }
     }
     /**
+     * 查询数独
+     *
+     * @param request
+     * @return
+     */
+    @GetMapping("/search_sudoku")
+    public BaseResponse<List<Sudokupuzzles>> searchSudokus(HttpServletRequest request) {
+        //查询
+        QueryWrapper<Sudokupuzzles> queryWrapper = new QueryWrapper<>();
+        List<Sudokupuzzles> sudokuList = sudokupuzzlesService.list(queryWrapper);
+        return ResultUtils.success(sudokuList);
+    }
+    /**
      * 保存数独题目
      * @param puzzleGenerateRequest
      *
@@ -81,6 +98,35 @@ public class SudokuController {
             return null;
         }
         Integer result = sudokupuzzlesService.savePuzzle(initial_board, solution, difficulty);
+        return ResultUtils.success(result);
+    }
+    /**
+     * 删除数独题目(须鉴权)
+     *
+     * @param navDeleteRequest
+     * @param request
+     * @return
+     */
+    @PostMapping("/delete_sudoku")
+    public BaseResponse<Boolean> deleteSudoku(@RequestBody PuzzleDeleteRequest puzzleDeleteRequest, HttpServletRequest request) {
+        // 获取当前登录用户
+        Object userObj = request.getSession().getAttribute(USER_LOGIN_STATE);
+        User currentUser = (User) userObj;
+        // 仅管理员可删除
+        if (!isAdmin(request)) {
+            throw new BusinessException(ErrorCode.NO_AUTH, "无权限删除");
+        }
+        // 检查 id 是否为空
+        if (((puzzleDeleteRequest.getId()))==null) {
+            throw new BusinessException(ErrorCode.PARAMS_ERROR, "navKey无效");
+        }
+        // 使用 LambdaQueryWrapper 通过 navKey 删除导航
+        QueryWrapper<Sudokupuzzles> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", puzzleDeleteRequest.getId());
+        boolean result = sudokupuzzlesService.remove(queryWrapper);
+        if (!result) {
+            throw new BusinessException(ErrorCode.SYSTEM_ERROR, "删数独题目失败");
+        }
         return ResultUtils.success(result);
     }
     /**
