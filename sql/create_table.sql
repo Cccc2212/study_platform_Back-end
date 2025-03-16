@@ -1,4 +1,22 @@
--- auto-generated definition
+create table nav
+(
+    id     bigint auto_increment
+        primary key,
+    label  varchar(255) not null comment '标签名',
+    navKey varchar(100) not null comment 'key值',
+    url    varchar(255) null comment '网址'
+)
+    comment '导航表';
+
+create table sudokupuzzles
+(
+    id            int auto_increment
+        primary key,
+    initial_board text not null,
+    solution      text not null,
+    difficulty    int  not null
+);
+
 create table user
 (
     id           bigint auto_increment
@@ -18,16 +36,4 @@ create table user
     platformCode varchar(512)                       null comment '平台编号'
 )
     comment '用户表';
-
--- auto-generated definition
-create table nav
-(
-    id     bigint auto_increment
-        primary key,
-    label  varchar(255) not null comment '标签名',
-    navKey varchar(100) not null comment 'key值',
-    url    varchar(255) null comment '网址'
-)
-    comment '导航表';
-
 
